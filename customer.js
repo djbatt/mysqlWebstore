@@ -1,8 +1,3 @@
-//ask the user which product they want to buy
-//ask how many they want to buy
-//check if the store has enough, if not let the user know that we dont have enough give them a message
-//if you do have enough, update the database quantity, and give the user the total
-
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
@@ -53,8 +48,6 @@ function buyItem() {
                 }
             }
 
-            //console.log(selected_product);
-
             inquirer.prompt([
                 {
                     type: "input",
@@ -91,8 +84,6 @@ function buyItem() {
                     console.log("There is not enough stock to fill that order!");
                     connection.end();
                 }
-                
-                //console.log(answers.product_count);
             })
         });
     })
