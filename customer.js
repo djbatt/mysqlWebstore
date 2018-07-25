@@ -45,6 +45,7 @@ function buyItem() {
         ]).then(function(answers) {
 
             var selected_product;
+            var selected_product_name = answers.product_purchase;
 
             for (var i = 0; i < res.length; i++) {
                 if (res[i].product_name === answers.product_purchase) {
@@ -58,28 +59,37 @@ function buyItem() {
                 {
                     type: "input",
                     name: "product_count",
-                    message: "How many\xa0" + answers.product_purchase + "\xa0would you like to buy?"
+                    message: "How many\xa0" + selected_product_name + "\xa0would you like to buy?"
                 }
             ]).then(function(answers) {
 
                 var parseFloatStock = parseFloat(selected_product.stock_quantity);
                 var parseFloatCount = parseFloat(answers.product_count);
 
-                if (parseFloatStock > parseFloatCount) {
+                var userTotal = parseFloatCount * parseFloat(selected_product.price);
+
+                if (parseFloatStock >= parseFloatCount) {
                     var updated_stock_quantity = parseFloatStock - parseFloatCount;
+                    console.log(updated_stock_quantity);
 
                     var parameters = [
                         {
                             stock_quantity: updated_stock_quantity
                         },
                         {
-                            id: selected_product.item_id
+                            item_id: selected_product.item_id
                         }
                     ]
 
                     connection.query("UPDATE products SET ? WHERE ?", parameters, function(err, res) {
-                        
+                        if (err) throw err;
+                        console.log("You bought\xa0" + parseFloatCount + "\xa0of\xa0" + selected_product_name);
+                        console.log("The total is:\xa0" + "$" + userTotal);
+                        connection.end();
                     })
+                } else {
+                    console.log("There is not enough stock to fill that order!");
+                    connection.end();
                 }
                 
                 //console.log(answers.product_count);
