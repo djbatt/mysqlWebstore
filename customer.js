@@ -15,7 +15,7 @@ connection.connect(function(err) {
     buyItem();
 })
 
-function buyItem() {
+function buyItem() { // add a function that adds to product sales when a customer buys something!
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
 

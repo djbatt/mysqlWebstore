@@ -15,11 +15,18 @@ CREATE TABLE products (
 CREATE TABLE departments (
 	department_id INTEGER (50) NOT NULL AUTO_INCREMENT,
     department_name VARCHAR (50) NOT NULL,
-    over_head_costs INTEGER (50) NOT NULL
+    over_head_costs INTEGER (50) NOT NULL,
+    PRIMARY KEY (department_id)
 );
 
-INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("Laptop", "Technology", 1400, 12);
+ALTER TABLE products
+ADD COLUMN products_sales DECIMAL(10, 4) AFTER stock_quantity;
+
+SELECT * FROM departments;
+
+SELECT * FROM products;
+
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("Cabinet", "Furniture", 320, 8);
+VALUES ("Macbook", "Technology", 2100, 7);
+
