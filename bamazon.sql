@@ -26,6 +26,8 @@ SELECT * FROM departments;
 
 SELECT * FROM products;
 
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("Furniture", 1100);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Macbook", "Technology", 2100, 7);
